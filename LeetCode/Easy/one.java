@@ -1,6 +1,7 @@
 package LeetCode.Easy;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /*
@@ -45,12 +46,13 @@ class one{
 		int[] answer = new int[2];
 		int diff = 0;
 		int arrayLength = nums.length;
-		boolean done = false;
 
 		// System.out.println(Arrays.toString(nums));
 		// System.out.println(target);
 		
 		// Brute force O(n^2)
+		/*
+		boolean done = false;
 		for(int i=0; i<arrayLength; i++){
 			diff = target - nums[i];
 			for(int j=i+1; j<arrayLength; j++){
@@ -62,13 +64,20 @@ class one{
 			}
 			if(done == true) break;
 		}
+		*/
 
 		// HashMap O(n)
-		/*
+		HashMap<Integer, Integer> indexOfElement = new HashMap<Integer, Integer>(); 
 		for(int i=0; i<arrayLength; i++){
-
+			diff = target - nums[i];
+			if(indexOfElement.containsKey(diff) == true){
+				answer[0] = indexOfElement.get(diff);
+				answer[1] = i;
+				break;
+			}
+			indexOfElement.put(nums[i], i);
 		}
-		*/
+		
 		return answer;
 	}
 
