@@ -41,20 +41,25 @@ public class nine {
 	
 	public boolean isPalindrome(int x) {
 		Boolean answer = false;
-		if(x<0) return answer;
-
+		if(x<0 || (x%10 == 0 && x!=0)) return answer;
+		
 		int number = x, numberInv = 0;
+		
+		// Basic full number reversal O(n)
+		/*
 		while(number > 0){
 			numberInv = (numberInv*10) + (number%10);
-			number = (int)number/10;
-			
-			// System.out.print("Num:");
-			// System.out.println(number);
-			// System.out.print("NumInv:");
-			// System.out.println(numberInv);
-
+			number = number/10;
 		}
 		if((x-numberInv) == 0) answer = true;
+		*/
+
+		//Optimized half number reversal O(n/2)
+		while(number > numberInv){
+			numberInv = (numberInv*10) + (number%10);
+			number = number/10;
+		}
+		if((number == numberInv) || (number == (numberInv/10))) answer = true;
 		return answer;
 	}
 	public static void main(String[] args) {
