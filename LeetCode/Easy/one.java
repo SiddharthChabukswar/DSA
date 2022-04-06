@@ -40,7 +40,7 @@ Only one valid answer exists.
 
 */
 
-class one{
+public class one{
 
 	public int[] twoSum(int[] nums, int target) {
 		int[] answer = new int[2];
