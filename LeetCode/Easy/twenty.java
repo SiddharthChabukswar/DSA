@@ -3,7 +3,6 @@ package LeetCode.Easy;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
 
 /*
 
