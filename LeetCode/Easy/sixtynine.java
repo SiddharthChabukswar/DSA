@@ -62,6 +62,7 @@ public class sixtynine {
 			}
 		}
 		*/
+		
 		if(x==1) answer = 1;
 		return answer;
 	}
