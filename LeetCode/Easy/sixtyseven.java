@@ -33,8 +33,28 @@ public class sixtyseven {
 
 	public String addBinary(String a, String b) {
 		String answer = "";
-		char curr, curra, currb;
+		char curr;
 		int alen = a.length()-1, blen = b.length()-1, carry = 0;
+
+		// Mathematics O(n)
+		int maxlen = Math.max(alen, blen), i = 0;
+		int val1, val2, sum;
+		while(i<=maxlen){
+			if((alen - i) >= 0) val1 = a.charAt((alen - i)) - '0';
+			else val1 = 0;
+			if((blen - i) >= 0) val2 = b.charAt((blen - i)) - '0';
+			else val2 = 0;
+			sum = val1 + val2 + carry;
+			curr = (char)(sum%2 + '0');
+			answer = curr + answer;
+			carry = sum/2;
+			i++;
+		}
+
+
+		// Conditional solution O(n)
+		/*
+		char curra, currb;
 		while(alen>=0 && blen>=0){
 			curra = a.charAt(alen);
 			currb = b.charAt(blen);
@@ -93,6 +113,8 @@ public class sixtyseven {
 			answer = curr + answer;
 			blen--;
 		}
+		*/
+
 		if(carry == 1) answer = "1" + answer;
 		return answer;
 	}
