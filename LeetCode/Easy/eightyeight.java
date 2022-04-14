@@ -60,7 +60,7 @@ public class eightyeight {
 		while(j>=0) nums1[k--] = nums2[j--];
 
 
-		// Comparing the shortest element from the front O(m+n)
+		// Comparing the shortest element from the front O(m+n) - LAZY
 		// Requires extra space of m+n
 		/*
 		int[] answer = new int[m+n];
