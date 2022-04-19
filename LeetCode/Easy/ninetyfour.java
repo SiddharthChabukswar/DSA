@@ -113,7 +113,19 @@ public class ninetyfour {
 	// call iterative function O(n)
 	public List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> inorder_List = new ArrayList<Integer>();
-
+		if(root == null) return inorder_List;
+		Stack<TreeNode> node_stack = new Stack<TreeNode>();
+		TreeNode curr = root;
+		do{
+			while(curr != null){
+				node_stack.add(curr);
+				curr = curr.left;
+			}
+			curr = node_stack.pop();
+			// System.out.printf("curr : %d \n", curr.val);
+			inorder_List.add(curr.val);
+			curr = curr.right;
+		}while(node_stack.size()!=0 || curr!=null);
 		return inorder_List;
 	}
 
