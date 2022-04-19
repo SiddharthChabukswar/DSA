@@ -3,41 +3,35 @@ package LeetCode.Easy;
 import java.util.Scanner;
 import java.util.Stack;
 
-
 /*
 
-https://leetcode.com/problems/same-tree/
+https://leetcode.com/problems/symmetric-tree/
 
-Given the roots of two binary trees p and q, write a function to check if they are the same or not.
-
-Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
  
 
 Example 1:
 
 
-Input: p = [1,2,3], q = [1,2,3]
+Input: root = [1,2,2,3,4,4,3]
 Output: true
 Example 2:
 
 
-Input: p = [1,2], q = [1,null,2]
-Output: false
-Example 3:
-
-
-Input: p = [1,2,1], q = [1,1,2]
+Input: root = [1,2,2,null,3,null,3]
 Output: false
  
 
 Constraints:
 
-The number of nodes in both trees is in the range [0, 100].
--104 <= Node.val <= 104
+The number of nodes in the tree is in the range [1, 1000].
+-100 <= Node.val <= 100
+ 
+
+Follow up: Could you solve it both recursively and iteratively?
 
 */
-
 
 // Defined in problem 94
 // Definition for a binary tree node.
@@ -57,9 +51,8 @@ class TreeNode {
 
 
 
-
-public class hundred {
-
+public class hundredandone {
+	
 	public TreeNode createTree(int root_val, Scanner sc) {
 		TreeNode root;
 		if(root_val == -1) return null;
@@ -92,31 +85,27 @@ public class hundred {
 		return root;
 	}
 
-
-	public boolean isSameTree(TreeNode p, TreeNode q) {
-		if(p == null && q == null) return true;
-		else if(p == null || q == null) return false;
-		// System.out.printf("p: %d && q: %d\n", p.val, q.val);
-		if(p.val != q.val) return false;
-		else return (isSameTree(p.left, q.left) && isSameTree(p.right, q.right));
+	public boolean checkSubtree(TreeNode p1, TreeNode p2){
+		if(p1 == null && p2 == null) return true;
+		else if(p1 == null || p2 == null) return false;
+		else if(p1.val != p2.val) return false;
+		return (checkSubtree(p1.left, p2.right) && checkSubtree(p1.right, p2.left));
 	}
 
-
+	public boolean isSymmetric(TreeNode root) {
+		if(root == null) return true;
+		return checkSubtree(root.left, root.right);
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		hundred objHundred = new hundred();
-
-		System.out.print("Enter root1: ");
+		System.out.print("Enter root: ");
 		int root_val = sc.nextInt();
-		TreeNode root1 = objHundred.createTree(root_val, sc);
-		
-		System.out.print("Enter root2: ");
-		root_val = sc.nextInt();
-		TreeNode root2 = objHundred.createTree(root_val, sc);
-
-		boolean answer = objHundred.isSameTree(root1, root2);
+		hundredandone objHundredandone = new hundredandone();
+		TreeNode root = objHundredandone.createTree(root_val, sc);
+		boolean answer = objHundredandone.isSymmetric(root);
 		System.out.println(answer);
 		sc.close();
 	}
+
 }

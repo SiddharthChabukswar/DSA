@@ -31,7 +31,7 @@ The list is guaranteed to be sorted in ascending order.
 */
 
 // Already compiled in problem twentyone
-/*
+
 class ListNode {
 	int val;
 	ListNode next;
@@ -44,7 +44,7 @@ class ListNode {
 		this.next = next;
 	}
 }
-*/
+
 
 public class eightythree {
 	
