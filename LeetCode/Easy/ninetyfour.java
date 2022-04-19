@@ -91,18 +91,17 @@ public class ninetyfour {
 	}
 
 	// Get inorder List O(n)
-	public List<Integer> inorder(TreeNode curr, List<Integer> inorder_List){
-		if(curr == null) return inorder_List;
-		inorder_List = inorder(curr.left, inorder_List);
+	public void inorder(TreeNode curr, List<Integer> inorder_List){
+		if(curr == null) return;
+		inorder(curr.left, inorder_List);
 		inorder_List.add(curr.val);
-		inorder_List = inorder(curr.right, inorder_List);
-		return inorder_List;
+		inorder(curr.right, inorder_List);
 	}
 
 	// Call recursive function O(n)
 	public List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> inorder_List = new ArrayList<Integer>();
-		inorder_List = inorder(root, inorder_List);
+		inorder(root, inorder_List);
 		return inorder_List;
 	}
 
@@ -114,6 +113,7 @@ public class ninetyfour {
 	// call iterative function O(n)
 	public List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> inorder_List = new ArrayList<Integer>();
+
 		return inorder_List;
 	}
 
