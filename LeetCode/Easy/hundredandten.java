@@ -86,7 +86,7 @@ public class hundredandten {
 	}
 
 	// Top Down Approach O(n^2) : Heights of each subtree is recalculated, Could be improved using hashmaps (Storing heights)
-	
+	/*
 	public int findHeight(TreeNode node){
 		if(node == null) return 0;
 		return 1 + Math.max(findHeight(node.left), findHeight(node.right));
@@ -101,7 +101,29 @@ public class hundredandten {
 		if(heightDiff > 1) return false;
 		return (true && isBalanced(root.left) && isBalanced(root.right));
 	}
-	
+	*/
+
+	// Bottom up Approach O(n) : We'll start from bottom return -1 if unbalanced and height of subtree if balanced.
+	// Calculate height such that if height of one of the subtree is -1 return -1
+
+	public int getHeight(TreeNode curr){
+		if(curr == null) return 0;
+		int lheight, rheight;
+		lheight = getHeight(curr.left);
+		if(lheight == -1) return -1;
+		rheight = getHeight(curr.right);
+		if(rheight == -1) return -1;
+		if(Math.abs(lheight - rheight) > 1) return -1;
+		return 1+Math.max(lheight, rheight);
+	}
+
+
+	public boolean isBalanced(TreeNode root) {
+		if(getHeight(root) == -1) return false;
+		return true;
+	}
+
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter root: ");
