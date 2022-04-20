@@ -85,6 +85,57 @@ public class hundredandfour {
 		if(root == null) return 0;
 		return 1 + Math.max((maxDepth(root.left)), maxDepth(root.right));
 	}
+	
+
+
+	// Iterative BFS O(n)
+	/*
+	public int maxDepth(TreeNode root){
+		if(root == null) return 0;
+		Queue<TreeNode> node_queue = new LinkedList<TreeNode>();
+		node_queue.add(root);
+		int height = 0, i, queue_len;
+		TreeNode curr;
+		while(node_queue.size() != 0){
+			queue_len = node_queue.size();
+			for(i=0; i<queue_len; i++){
+				curr = node_queue.remove();
+				if(curr.left != null) node_queue.add(curr.left);
+				if(curr.right != null) node_queue.add(curr.right);
+			}
+			height++;
+		}
+		return height;
+	}
+	*/
+
+
+	// Iterative DFS O(n)
+	/*
+	public int maxDepth(TreeNode root){
+		if(root == null) return 0;
+		Stack<TreeNode> node_stack = new Stack<TreeNode>();
+		Stack<Integer> height_stack = new Stack<Integer>();
+		node_stack.add(root);
+		height_stack.add(1);
+		TreeNode curr;
+		int max_height = Integer.MIN_VALUE, curr_height = 0;
+		while(node_stack.size() != 0){
+			curr = node_stack.pop();
+			curr_height = height_stack.pop();
+			max_height = Math.max(max_height, curr_height);
+			if(curr.left != null){
+				node_stack.add(curr.left);
+				height_stack.add(curr_height+1);
+			}
+			if(curr.right != null){
+				node_stack.add(curr.right);
+				height_stack.add(curr_height+1);
+			}
+		}
+		return max_height;
+	}
+	*/
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
