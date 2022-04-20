@@ -85,6 +85,9 @@ public class hundredandone {
 		return root;
 	}
 
+	/*
+	// Recursive solution check mirror image O(n)
+	
 	public boolean checkSubtree(TreeNode p1, TreeNode p2){
 		if(p1 == null && p2 == null) return true;
 		else if(p1 == null || p2 == null) return false;
@@ -95,6 +98,34 @@ public class hundredandone {
 	public boolean isSymmetric(TreeNode root) {
 		if(root == null) return true;
 		return checkSubtree(root.left, root.right);
+	}
+
+	*/
+
+	// Iterative approach using stack O(n)
+	
+	public boolean isSymmetric(TreeNode root) {
+		if(root == null) return false;
+		TreeNode p = root.left, q = root.right;
+		Stack<TreeNode> node_stack = new Stack<TreeNode>();
+		while(node_stack.size() != 0 || p!=null || q!=null){
+			while(p == null && q == null){
+				// for(int i=0; i<node_stack.size(); i++) System.out.printf("%d ,", node_stack.elementAt(i).val);
+				// System.out.println();
+				if(node_stack.size() == 0) return true;
+				q = node_stack.pop();
+				p = node_stack.pop();
+				p = p.right;
+				q = q.left;
+			}
+			if(p == null || q==null) return false;
+			else if(p.val != q.val) return false;
+			node_stack.push(p);
+			node_stack.push(q);
+			p = p.left;
+			q = q.right;
+		}
+		return true;
 	}
 
 	public static void main(String[] args) {
