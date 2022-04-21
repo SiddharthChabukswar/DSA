@@ -1,7 +1,10 @@
 package LeetCode.Easy;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
+
 
 /*
 
@@ -56,6 +59,17 @@ class TreeNode {
 	}
 }
 
+// Used for BFS
+
+class node_sum_pair{
+	TreeNode node;
+	int sum;
+	node_sum_pair(TreeNode node, int sum){
+		this.node = node;
+		this.sum = sum;
+	}
+}
+
 
 public class hundredandtwelve {
 	
@@ -91,8 +105,30 @@ public class hundredandtwelve {
 		return root;
 	}
 
+	// BFS solution O(n)
+
 	public boolean hasPathSum(TreeNode root, int targetSum) {
 		if(root == null) return false;
+
+		node_sum_pair objNode_sum_pair;
+		Queue<node_sum_pair> node_sum_queue = new LinkedList<node_sum_pair>();
+
+		int node_queue_length = 0, i = 0, curr_sum = 0;
+		TreeNode curr_node = null;
+		
+		node_sum_queue.add(new node_sum_pair(root, root.val));
+
+		while(!node_sum_queue.isEmpty()){
+			node_queue_length = node_sum_queue.size();
+			for(i=0; i<node_queue_length; i++){
+				objNode_sum_pair = node_sum_queue.remove();
+				curr_node = objNode_sum_pair.node;
+				curr_sum = objNode_sum_pair.sum;
+				if(curr_node.left == null && curr_node.right == null && curr_sum == targetSum) return true;
+				if(curr_node.left != null) node_sum_queue.add(new node_sum_pair(curr_node.left, curr_sum + curr_node.left.val));
+				if(curr_node.right != null) node_sum_queue.add(new node_sum_pair(curr_node.right, curr_sum + curr_node.right.val));
+			}
+		}
 		return false;
 	}
 
