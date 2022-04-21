@@ -133,7 +133,6 @@ public class hundredandten {
 		boolean answer = objHundredandten.isBalanced(root);
 		System.out.println(answer);
 		sc.close();
-		sc.close();
 	}
 
 }
