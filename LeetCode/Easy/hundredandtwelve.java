@@ -1,7 +1,5 @@
 package LeetCode.Easy;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -106,7 +104,7 @@ public class hundredandtwelve {
 	}
 
 	// BFS solution O(n)
-
+	/*
 	public boolean hasPathSum(TreeNode root, int targetSum) {
 		if(root == null) return false;
 
@@ -130,6 +128,16 @@ public class hundredandtwelve {
 			}
 		}
 		return false;
+	}
+	*/
+
+	// DFS solution O(n) with using difference variable
+
+	public boolean hasPathSum(TreeNode root, int targetSum) {
+		if(root == null) return false;
+		int diff = targetSum - root.val;
+		if(root.left == null && root.right == null) return (diff == 0);
+		return (hasPathSum(root.left, diff) || hasPathSum(root.right, diff));
 	}
 
 	public static void main(String[] args) {
