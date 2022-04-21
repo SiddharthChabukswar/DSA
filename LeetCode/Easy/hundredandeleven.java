@@ -83,7 +83,7 @@ public class hundredandeleven {
 
 
 	// BFS Optimal Solution O(n) return on first occurance of a leaf node
-
+	
 	public int minDepth(TreeNode root) {
 		if(root == null) return 0;
 		int height = 1, curr_queue_length = 0, i = 0;
@@ -102,6 +102,17 @@ public class hundredandeleven {
 		}
 		return height;
 	}
+
+	// Recursive DFS Solution O(n) return minimum of left subtree and right subtree
+	/*
+	public int minDepth(TreeNode root){
+		if(root == null) return 0;
+		int lheight = minDepth(root.left);
+		int rheight = minDepth(root.right);
+		if(lheight == 0 || rheight == 0) return 1 + Math.max(lheight, rheight);
+		return 1+Math.min(lheight, rheight);
+	}
+	*/
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
