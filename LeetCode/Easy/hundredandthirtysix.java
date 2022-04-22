@@ -1,5 +1,6 @@
 package LeetCode.Easy;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /*
@@ -51,8 +52,21 @@ public class hundredandthirtysix {
 	
 	// 
 
+	// Using hashmap O(n) Extra space O(n)
+
 	public int singleNumber(int[] nums) {
-		return 0;
+		HashMap<Integer, Boolean> present = new HashMap<Integer, Boolean>();
+		int answer = 0, n = nums.length, i;
+		for(i=0; i<n; i++){
+			if(present.get(nums[i]) == null || present.get(nums[i]) == false){
+				present.put(nums[i], true);
+				answer += nums[i];
+			}else{
+				present.put(nums[i], false);
+				answer -= nums[i];
+			}
+		}
+		return answer;
 	}
 
 	public static void main(String[] args) {
