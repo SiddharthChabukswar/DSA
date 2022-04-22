@@ -39,6 +39,8 @@ s consists only of printable ASCII characters.
 
 public class hundredandtwentyfive {
 
+	// Naive approach O(n)
+	/*
 	public boolean isPalindrome(String s) {
 		int i, slen = s.length();
 		String refined_s = "";
@@ -51,6 +53,37 @@ public class hundredandtwentyfive {
 		}
 		slen = refined_s.length();
 		for(i=0; i<slen/2; i++) if(refined_s.charAt(i) != refined_s.charAt(slen - 1 - i)) return false; 
+		return true;
+	}
+	*/
+
+	// Two pointer method O(n) No extra space needed.
+
+	public boolean isAlphaNumeric(char c){
+		if(c >= 'a' && c <= 'z') return true;
+		else if(c >= '0' && c <= '9') return true;
+		return false;
+	}
+
+	public boolean isPalindrome(String s){
+		int left = 0, slen = s.length(), right = slen-1;
+		s = s.toLowerCase();
+		char l_curr_char, r_curr_char;
+		while(left < right){
+			l_curr_char = s.charAt(left);
+			r_curr_char = s.charAt(right);
+			if(!isAlphaNumeric(l_curr_char)){
+				left++;
+				continue;
+			}
+			if(!isAlphaNumeric(r_curr_char)){
+				right--;
+				continue;
+			}
+			if(l_curr_char != r_curr_char) return false;
+			left++;
+			right--;
+		}
 		return true;
 	}
 
