@@ -1,6 +1,5 @@
 package LeetCode.Easy;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 /*
@@ -53,7 +52,7 @@ public class hundredandthirtysix {
 	// 
 
 	// Using hashmap O(n) Extra space O(n)
-
+	/*
 	public int singleNumber(int[] nums) {
 		HashMap<Integer, Boolean> present = new HashMap<Integer, Boolean>();
 		int answer = 0, n = nums.length, i;
@@ -66,6 +65,19 @@ public class hundredandthirtysix {
 				answer -= nums[i];
 			}
 		}
+		return answer;
+	}
+	*/
+
+	// Using XOR logic: O(n) no extra space O(1)
+	// 0^0 0
+	// 0^1 1
+	// 1^0 1
+	// 1^1 0
+
+	public int singleNumber(int[] nums) {
+		int answer = 0, n = nums.length;
+		for(int i=0; i<n; i++) answer ^= nums[i];
 		return answer;
 	}
 
