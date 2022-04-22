@@ -60,9 +60,31 @@ class ListNode {
 
 public class hundredandfourtyone {
 
+	// HashSet implementation O(n) : Extra space O(n)
+	/*
 	public boolean hasCycle(ListNode head) {
+		HashSet<ListNode> nodeSet = new HashSet<ListNode>();
+		while(head!=null){
+			if(nodeSet.contains(head)) return true;
+			nodeSet.add(head);
+			head = head.next;
+		}
 		return false;
 	}
+	*/
+
+	// Floyd's hare and tortoise solution : Two pointer O(n) : Space O(1)
+	public boolean hasCycle(ListNode head) {
+		if(head == null) return false;
+		ListNode slow=head, fast=head;
+		while(fast!=null && fast.next!=null){
+			slow = slow.next;
+			fast = fast.next.next;
+			if(slow == fast) return true;
+		}
+		return false;
+	}
+
 	
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in)) {
