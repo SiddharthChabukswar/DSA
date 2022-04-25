@@ -115,7 +115,7 @@ public class hundredandsixty {
 
 
 	// Two pointers after delta shift O(m+n), space: O(1)
-
+	/*
 	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 		ListNode answer = null, curr = null;
 		int m = 0, n = 0;
@@ -145,6 +145,21 @@ public class hundredandsixty {
 
 		return answer;
 	}
+	*/
+
+	// Genius solution O(m+n); space: O(1)
+
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		ListNode a = headA, b = headB;
+		while(a!=b){
+			if(a!=null) a = a.next;
+			else a = headB;
+			if(b!=null) b = b.next;
+			else b = headA;
+		}
+		return a;
+	}
+
 
 	public static void main(String[] args) {
 		return;
