@@ -105,7 +105,7 @@ public class hundredandfourtyfive {
 	*/
 
 	// Iterative approach O(n) , Two stack method Space: O(n)
-
+	/*
 	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> postorder_list = new ArrayList<Integer>();
 		if(root == null){
@@ -126,6 +126,42 @@ public class hundredandfourtyfive {
 			return postorder_list;
 		}	
 	}
+	*/
+
+	// Iterative approach O(n), One stack method Space: O(depthTree)
+
+	public List<Integer> postorderTraversal(TreeNode root) {
+		List<Integer> postorder_list = new ArrayList<Integer>();
+		if(root == null){
+			return postorder_list;
+		}
+		else{
+			Stack<TreeNode> node_stack = new Stack<TreeNode>();
+			TreeNode curr = root, temp;
+			while(!node_stack.isEmpty() || curr!=null){
+				while(curr!=null){
+					node_stack.add(curr);
+					curr = curr.left;
+				}
+				temp = node_stack.peek().right;
+				// leaf node
+				if(temp == null){
+					temp = node_stack.pop();
+					postorder_list.add(temp.val);
+					// Check if popped node is a rigth leaf i.e. no need to visit right again
+					while(!node_stack.isEmpty() && node_stack.peek().right == temp){
+						temp = node_stack.pop();
+						postorder_list.add(temp.val);
+					}
+				}
+				else{
+					curr = temp;
+				}
+			}
+			return postorder_list;
+		}	
+	}
+
 
 
 	public static void main(String[] args) {
