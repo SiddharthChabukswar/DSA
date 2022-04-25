@@ -46,7 +46,7 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin.
 */
 
 // Brute force Pop: O(n)
-
+/*
 class MinStack {
 
 	List<Integer> stack;
@@ -81,6 +81,42 @@ class MinStack {
 		return min_ele;
 	}
 
+}
+*/
+
+
+// Optimal solution O(1) all operations
+
+class MinStack{
+
+	List<Integer> stack;
+	List<Integer> curr_min;
+	int size;
+
+	MinStack() {
+		stack = new ArrayList<Integer>();
+		curr_min = new ArrayList<Integer>();
+		size = 0;
+	}
+	
+	public void push(int val) {
+		if(size == 0) curr_min.add(0, val);
+		else curr_min.add(size, Math.min(curr_min.get(size-1), val));
+		stack.add(size, val);
+		size++;
+	}
+	
+	public void pop() {
+		size--;
+	}
+	
+	public int top() {
+		return stack.get(size-1);
+	}
+	
+	public int getMin() {
+		return curr_min.get(size-1);
+	}
 }
 
 
