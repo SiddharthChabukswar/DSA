@@ -43,16 +43,13 @@ Constraints:
 public class hundredandsixtyeight {
 	
 	public String convertToTitle(int columnNumber) {
-		String answer="";
-		int remainder = 0;
+		StringBuilder answer = new StringBuilder();
 		while(columnNumber!=0){
-			remainder = columnNumber%26;
-			if(remainder == 0) remainder = 26;
-			answer = (char)('A' + remainder - 1) + answer;
-			columnNumber = (columnNumber - remainder) / 26;
-			// System.out.println(answer);
+			columnNumber--;
+			answer.append((char)('A' + columnNumber%26));
+			columnNumber = columnNumber / 26;
 		}
-		return answer;
+		return answer.reverse().toString();
 	}
 
 	public static void main(String[] args) {
@@ -64,5 +61,5 @@ public class hundredandsixtyeight {
 		System.out.println(answer);
 		sc.close();
 	}
-
+	
 }
