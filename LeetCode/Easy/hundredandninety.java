@@ -1,7 +1,5 @@
 package LeetCode.Easy;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -37,22 +35,15 @@ The input must be a binary string of length 32
 public class hundredandninety {
 
 	public int reverseBits(int n) {
-		int answer = 0, i, power = 1, curr = 32;
-		Boolean val;
-		List<Boolean> answer_bit = new ArrayList<Boolean>();
+		int prev_answer = 0, answer = 0, curr = 32;
 		while(curr!=0){
-			val = !(n%2 == 0);
-			answer_bit.add(val);
+			answer += (n&1);
 			n = n>>1;
+			prev_answer = answer;
+			answer = answer<<1;
 			curr--;
 		}
-		for(i=answer_bit.size()-1; i>=0; i--){
-			if(answer_bit.get(i)) curr = 1;
-			else curr = 0;
-			answer += power*curr;
-			power *= 2;
-		}
-		return answer;
+		return prev_answer;
 	}
 
 	public static void main(String[] args) {
