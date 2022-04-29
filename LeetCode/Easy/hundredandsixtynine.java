@@ -67,9 +67,15 @@ public class hundredandsixtynine {
 		return answer;
 	}
 	*/
-	
+
+	// Boyer - Moore's algorithm for > (n/2) : O(n), Space O(1)
 	public int majorityElement(int[] nums){
-		int answer = 0;
+		int answer = 0, count = 0, n = nums.length, i;
+		for(i=0; i<n; i++){
+			if(count == 0) answer = nums[i];
+			if(nums[i] == answer) count++;
+			else count--;
+		}
 		return answer;
 	}
 
