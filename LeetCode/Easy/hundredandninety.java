@@ -52,7 +52,6 @@ public class hundredandninety {
 			answer += power*curr;
 			power *= 2;
 		}
-		System.out.println(answer_bit.toString());
 		return answer;
 	}
 
