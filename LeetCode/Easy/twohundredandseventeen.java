@@ -1,10 +1,7 @@
 package LeetCode.Easy;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
-
-import javax.lang.model.type.NullType;
 
 /*
 
