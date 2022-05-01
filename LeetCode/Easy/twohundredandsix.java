@@ -44,10 +44,26 @@ public class twohundredandsix {
 	}
 	*/
 
+	// Iterative Solution time O(n) and space O(1)
+	public ListNode reverseList(ListNode head) {
+		if(head == null) return head;
+		ListNode ptr2 = head, ptr3;
+		head = null;
+		while(ptr2!=null){
+			ptr3 = ptr2.next;
+			ptr2.next = head;
+			head = ptr2;
+			ptr2 = ptr3;
+		}
+		return head;
+	}
+
 	// Recursive Solution time and space O(n)
+	/*
 	public ListNode reverseList(ListNode head) {
 		return null;
 	}
+	*/
 
 
 	public static void main(String[] args) {
