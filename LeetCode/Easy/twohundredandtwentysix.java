@@ -1,5 +1,7 @@
 package LeetCode.Easy;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -82,7 +84,8 @@ public class twohundredandtwentysix {
 		return root;
 	}
 
-	// Recursive solution O(n) Top - Bottom approach
+	// Recursive solution O(n) Top-bottom approach
+	/*
 	public TreeNode invertTree(TreeNode root) {
 		if(root == null) return null;
 		TreeNode temp = new TreeNode();
@@ -91,7 +94,37 @@ public class twohundredandtwentysix {
 		root.right = invertTree(temp);
 		return root;
 	}
+	*/
 
+	// Recursive solution O(n) Bottom-up approach
+	/*
+	public TreeNode invertTree(TreeNode root) {
+		if(root == null) return null;
+		TreeNode leftSubTree = invertTree(root.left);
+		TreeNode rightSubTree = invertTree(root.right);
+		root.left = rightSubTree;
+		root.right = leftSubTree;
+		return root;
+	}
+	*/
+
+	// Iterative solution O(n) BFS
+	public TreeNode invertTree(TreeNode root) {
+		if(root == null) return null;
+		Queue<TreeNode> node_queue = new LinkedList<TreeNode>();
+		TreeNode curr, leftnode, rightnode;
+		node_queue.offer(root);
+		while(!node_queue.isEmpty()){
+			curr = node_queue.poll();
+			leftnode = curr.left;
+			rightnode = curr.right;
+			curr.left = rightnode;
+			curr.right = leftnode;
+			if(rightnode!=null) node_queue.offer(rightnode);
+			if(leftnode!=null) node_queue.offer(leftnode);
+		}
+		return root;
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
