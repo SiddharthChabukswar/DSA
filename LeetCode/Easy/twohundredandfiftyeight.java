@@ -36,6 +36,7 @@ Follow up: Could you do it without any loop/recursion in O(1) runtime?
 public class twohundredandfiftyeight {
 
 	// Naive approach O(n)
+	/*
 	public int addDigits(int num) {
 		int sum = 0;
 		while(num>9){
@@ -48,7 +49,18 @@ public class twohundredandfiftyeight {
 		}
 		return num;
 	}
-	
+	*/
+
+
+	// Finding pattern on paper O(1)
+	public int addDigits(int num) {
+		if(num == 0) return 0;
+		num = num % 9;
+		if(num == 0) num = 9;
+		return num;
+	}
+
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter number: ");
