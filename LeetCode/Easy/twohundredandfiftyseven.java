@@ -85,6 +85,7 @@ public class twohundredandfiftyseven {
 	}
 
 	// BFS O(n)
+	/*
 	public List<String> binaryTreePaths(TreeNode root) {
 		if(root == null) return null;
 		List<String> answer = new ArrayList<String>();
@@ -119,6 +120,27 @@ public class twohundredandfiftyseven {
 		}
 		return answer;
 	}
+	*/
+
+	// DFS recursive O(n)
+	public List<String> binaryTreePaths(TreeNode root) {
+		if(root == null) return null;
+		List<String> answer = new LinkedList<String>();
+		dfsTraversal(root, "", answer);
+		return answer;
+	}
+
+	public void dfsTraversal(TreeNode root, String current, List<String> answer){
+		if(root == null) return;
+		if(current != "") current = current + "->";
+		current = current + String.valueOf(root.val);
+		if(root.left == null && root.right == null){
+			answer.add(current);
+		}
+		dfsTraversal(root.left, current, answer);
+		dfsTraversal(root.right, current, answer);
+	}
+
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
