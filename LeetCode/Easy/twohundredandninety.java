@@ -42,6 +42,7 @@ All the words in s are separated by a single space.
 
 public class twohundredandninety {
 
+	
 	public boolean wordPattern(String pattern, String s) {
 		String[] s_arr = s.split(" ");
 		int plen = pattern.length(), slen = s_arr.length;
@@ -67,7 +68,6 @@ public class twohundredandninety {
 		}
 		return true;
 	}
-
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
