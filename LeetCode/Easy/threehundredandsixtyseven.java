@@ -1,5 +1,7 @@
 package LeetCode.Easy;
 
+import java.util.Scanner;
+
 /*
 
 Given a positive integer num, write a function which returns True if num is a perfect square else False.
@@ -26,4 +28,27 @@ Constraints:
 
 public class threehundredandsixtyseven {
 	
+	public boolean isPerfectSquare(int num) {
+		if(num == 0 || num == 1) return true;
+		long l = 1, r = num/2, mid, sqr;
+		while(l<=r){
+			mid = (r-l)/2 + l;
+			sqr = mid*mid;
+			// System.out.printf("%d: %d\n", mid, sqr);
+			if(sqr == num) return true;
+			else if(sqr > num) r = mid - 1;
+			else l = mid + 1;
+		} 
+		return false;
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter number: ");
+		int num = sc.nextInt();
+		threehundredandsixtyseven objThreehundredandsixtyseven = new threehundredandsixtyseven();
+		System.out.println(objThreehundredandsixtyseven.isPerfectSquare(num));
+		sc.close();
+	}
+
 }
