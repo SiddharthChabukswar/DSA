@@ -1,5 +1,8 @@
 package LeetCode.Easy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -35,6 +38,8 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
 
 public class threehundredandninetytwo {
 
+	// Two pointer method: O(s+t)
+	/*
 	public boolean isSubsequence(String s, String t) {
 		int i=0, j=0, slen = s.length(), tlen = t.length();
 		while(i<slen && j<tlen){
@@ -45,6 +50,47 @@ public class threehundredandninetytwo {
 			else j++;
 		}
 		if(i!=slen) return false;
+		return true;
+	}
+	*/
+
+	// Dynamic Programming: O(s + tlogt)
+	HashMap<Character, List<Integer>> processT(String t) {
+		HashMap<Character, List<Integer>> answer_map = new HashMap<Character, List<Integer>>();
+		List<Integer> curr;
+		int i, tlen = t.length();
+		char t_char;
+		for(i=0; i<tlen; i++) {
+			t_char = t.charAt(i);
+			curr = answer_map.get(t_char);
+			if(curr == null) curr = new ArrayList<Integer>();
+			curr.add(i);
+			answer_map.put(t_char, curr);
+		}
+		return answer_map;
+	}
+
+	public boolean isSubsequence(String s, String t) {
+		HashMap<Character, List<Integer>> t_map = processT(t);
+		List<Integer> curr;
+		int curr_low = -1, left, right, mid, k;
+		for(char s_char: s.toCharArray()){
+			curr = t_map.get(s_char);
+			if(curr == null) return false;
+			// System.out.println(s_char);
+			// System.out.println(curr_low);
+			// System.out.println(curr.toString());
+			left = 0;
+			right = curr.size()-1;
+			while(left <= right){
+				mid = (right - left)/2 + left;
+				k = curr.get(mid);
+				if(k > curr_low) right = mid-1;
+				else left = mid+1;
+			}
+			if(left>=curr.size() || curr_low > curr.get(left)) return false;
+			curr_low = curr.get(left);
+		}
 		return true;
 	}
 	
