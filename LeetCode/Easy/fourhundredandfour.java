@@ -1,7 +1,7 @@
 package LeetCode.Easy;
 
-import java.util.LinkedList;
-import java.util.Queue;
+// import java.util.LinkedList;
+// import java.util.Queue;
 
 /*
 
@@ -34,7 +34,22 @@ The number of nodes in the tree is in the range [1, 1000].
 
 public class fourhundredandfour {
 
+	int calculateLeftSum(TreeNode curr, Boolean isleft){
+		if(curr == null) return 0;
+		if(curr.left == null && curr.right == null){
+			if(isleft) return curr.val;
+			else return 0;
+		}
+		return calculateLeftSum(curr.left, true) + calculateLeftSum(curr.right, false);
+	}
+
+	// DFS O(n)
+	public int sumOfLeftLeaves(TreeNode root) {
+		return calculateLeftSum(root, false);
+	}
+
 	// BFS O(n)
+	/*
 	public int sumOfLeftLeaves(TreeNode root) {
 		int answer = 0;
 		if(root == null) return answer;
@@ -64,4 +79,6 @@ public class fourhundredandfour {
 		}
 		return answer;
 	}
+	*/
+
 }
