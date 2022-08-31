@@ -38,26 +38,6 @@ The number of nodes in both trees is in the range [0, 100].
 
 */
 
-
-// Defined in problem 94
-// Definition for a binary tree node.
-
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	TreeNode() {}
-	TreeNode(int val) { this.val = val; }
-	TreeNode(int val, TreeNode left, TreeNode right) {
-		this.val = val;
-		this.left = left;
-		this.right = right;
-	}
-}
-
-
-
-
 public class hundred {
 
 	public TreeNode createTree(int root_val, Scanner sc) {
