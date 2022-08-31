@@ -40,13 +40,17 @@ The number of nodes in both lists is in the range [0, 50].
 Both list1 and list2 are sorted in non-decreasing order.
 
 */
-
 class ListNode {
 	int val;
 	ListNode next;
 	ListNode() {}
-	ListNode(int val) { this.val = val; }
-	ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+	ListNode(int val) {
+		this.val = val;
+	}
+	ListNode(int val, ListNode next) { 
+		this.val = val;
+		this.next = next;
+	}
 }
 
 public class twentyone {

@@ -31,14 +31,6 @@ The number of nodes in the list is in the range [0, 104].
 
 */
 
-class ListNode {
-	int val;
-	ListNode next;
-	ListNode() {}
-	ListNode(int val) { this.val = val; }
-	ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-}
-
 public class twohundredandthree {
 
 	// Two pointer method
