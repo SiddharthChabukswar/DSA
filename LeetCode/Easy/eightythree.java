@@ -30,22 +30,6 @@ The list is guaranteed to be sorted in ascending order.
 
 */
 
-// Already compiled in problem twentyone
-
-class ListNode {
-	int val;
-	ListNode next;
-	ListNode() {}
-	ListNode(int val) {
-		this.val = val;
-	}
-	ListNode(int val, ListNode next) { 
-		this.val = val;
-		this.next = next;
-	}
-}
-
-
 public class eightythree {
 	
 	public ListNode deleteDuplicates(ListNode head) {
