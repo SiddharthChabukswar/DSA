@@ -29,19 +29,6 @@ Follow up: Could you do it in O(n) time and O(1) space?
 
 */
 
-class ListNode {
-	int val;
-	ListNode next;
-	ListNode() {}
-	ListNode(int val) {
-		this.val = val;
-	}
-	ListNode(int val, ListNode next) { 
-		this.val = val;
-		this.next = next;
-	}
-}
-
 public class twohundredandthirtyfour {
 	
 	// Store linked list in an array : O(n) Space O(n)

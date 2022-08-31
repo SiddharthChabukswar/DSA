@@ -44,19 +44,6 @@ The number of nodes in the tree is in the range [0, 5000].
 
 */
 
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	TreeNode() {}
-	TreeNode(int val) { this.val = val; }
-	TreeNode(int val, TreeNode left, TreeNode right) {
-		this.val = val;
-		this.left = left;
-		this.right = right;
-	}
-}
-
 // Used for BFS
 
 class node_sum_pair{

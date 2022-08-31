@@ -36,21 +36,6 @@ Follow up: Could you solve it both recursively and iteratively?
 // Defined in problem 94
 // Definition for a binary tree node.
 
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	TreeNode() {}
-	TreeNode(int val) { this.val = val; }
-	TreeNode(int val, TreeNode left, TreeNode right) {
-		this.val = val;
-		this.left = left;
-		this.right = right;
-	}
-}
-
-
-
 public class hundredandone {
 	
 	public TreeNode createTree(int root_val, Scanner sc) {

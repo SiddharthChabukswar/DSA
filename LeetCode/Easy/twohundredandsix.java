@@ -8,19 +8,6 @@ import java.util.Scanner;
 
 */
 
-class ListNode {
-	int val;
-	ListNode next;
-	ListNode() {}
-	ListNode(int val) {
-		this.val = val;
-	}
-	ListNode(int val, ListNode next) { 
-		this.val = val;
-		this.next = next;
-	}
-}
-
 public class twohundredandsix {
 
 	// Iterative Solution using stack time and space O(n)
