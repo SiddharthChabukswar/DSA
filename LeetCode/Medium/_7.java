@@ -34,24 +34,72 @@ Constraints:
 
 public class _7 {
 
+	// check overflow
 	public int reverse(int x) {
-		if(x == -2147483648) return 0;
-		int answer = 0;
-		Boolean isNegative = false;
-		if(x<0){
-			isNegative = true;
-			x *= -1;
-		}
-		while(x!=0){
-			answer *= 10;
-			answer += x%10;
+		int answer = 0, rem = 0;
+		while(x!=0) {
+			rem = x%10;
 			x /= 10;
-			if(answer < 0) return 0;
-			System.out.println(answer);
+			if((answer > Integer.MAX_VALUE/10) || ((answer == Integer.MAX_VALUE/10) && (rem > 7))) return 0;
+			if((answer < Integer.MIN_VALUE/10) || ((answer == Integer.MIN_VALUE/10) && (rem < -8))) return 0;
+			answer = answer*10 + rem;
 		}
-		if(isNegative == true) answer *= -1;
 		return answer;
 	}
+
+	// String approach
+	/*
+	private int convertStringtoInteger(String x_string, boolean isXNegative) {
+		int x = 0, i=0;
+		for(i=0; i<x_string.length()-1; i++) {
+			x += (x_string.charAt(i) - '0');
+			x *= 10;
+		}
+		if(isXNegative) {
+			x *= -1;
+			x -= (x_string.charAt(i) - '0');
+		}else {
+			x += (x_string.charAt(i) - '0');
+		}
+		return x;
+	}
+
+	private boolean compareStrings(String x_string, String compare_string) {
+		if(x_string.length() != compare_string.length()) return true;
+		for(int i=0; i<x_string.length(); i++) {
+			if(x_string.charAt(i) == compare_string.charAt(i)) continue;
+			else if(x_string.charAt(i) > compare_string.charAt(i)) return false;
+			else return true;
+		}
+		return true;
+	}
+
+	public int reverse(int x) {
+		if(x == Integer.MIN_VALUE) return 0;
+		if(x>=-11 && x<=11) return x;
+		boolean isXNegative = false;
+		if(x<0) {
+			isXNegative = true;
+			x *= -1;
+		}
+		int answer = 0;
+		StringBuilder x_stringBuilder = new StringBuilder();
+		while(x!=0) {
+			x_stringBuilder.append((char)((x%10) + '0'));
+			x /= 10;
+		}
+		String x_string = x_stringBuilder.toString();
+		System.out.println(x_string);
+		if(isXNegative) {
+			if(!compareStrings(x_string, "214748364")) return 0;
+			answer = convertStringtoInteger(x_string, true);
+		}else {
+			if(!compareStrings(x_string, "2147483647")) return 0;
+			answer = convertStringtoInteger(x_string, false);
+		}
+		return answer;
+	}
+	*/
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
