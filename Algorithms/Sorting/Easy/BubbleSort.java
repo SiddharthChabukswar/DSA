@@ -3,7 +3,7 @@ package Algorithms.Sorting.Easy;
 /*
 
 Purpose: Sort an unsorted array
-Time complexity: O(n)
+Time complexity: O(n^2)
 
 Approach:
 
