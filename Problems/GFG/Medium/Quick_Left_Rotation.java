@@ -1,4 +1,4 @@
-package GFG.Easy;
+package GFG.Medium;
 
 /*
 
@@ -38,14 +38,39 @@ K=2, N=7
 I/p:{1, 2, 3, 4, 5, 6, 7}
 Exp o/p:{3, 4, 5, 6, 7, 1, 2}
 for(0->N-(K%N))
+
+
+Inplace rotation makes this a medium level problem. Without extra space: 
+https://www.geeksforgeeks.org/array-rotation/
+
+Juggling algorithm
+
 */
 
 public class Quick_Left_Rotation {
 
+	int gcd(int a, int b) {
+		if(b==0) return a;
+		return gcd(b, a%b);
+	}
+
 	void leftRotate(long arr[], int k,int n) {
 		if(k%n == 0) return;
-		// long temp;
-		
+		k = k%n;
+		int number_of_sectors = gcd(k, n), j, l;
+		long temp;
+		for(int i=0; i<number_of_sectors; i++) {
+			temp = arr[i];
+			j = i;
+			while(true) {
+				l = j+k;
+				if(l > n) l = l-n;
+				if(l == i) break;
+				arr[j] = arr[l];
+				j = l;
+			}
+			arr[j] = temp;
+		}
 	}
 	
 }
