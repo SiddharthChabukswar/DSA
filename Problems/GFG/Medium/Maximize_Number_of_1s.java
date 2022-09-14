@@ -1,8 +1,5 @@
 package GFG.Medium;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
 
 https://practice.geeksforgeeks.org/problems/maximize-number-of-1s0905/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=maximize-number-of-1s
