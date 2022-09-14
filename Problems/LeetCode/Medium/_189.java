@@ -42,6 +42,31 @@ Could you do it in-place with O(1) extra space?
 
 public class _189 {
 
+	// Reversing the two parts of array [0 to n-k) and [n-k, n)
+	public void reverseArray(int[] nums, int start, int end) {
+		int temp;
+		end--;
+		while(end > start) {
+			temp = nums[start];
+			nums[start] = nums[end];
+			nums[end] = temp;
+			start++;
+			end--;
+		}
+	}
+	
+	public void rotate(int[] nums, int k) {
+		int n = nums.length;
+		k %= n;
+		if(k==0) return;
+		reverseArray(nums, 0, n-k);
+		reverseArray(nums, n-k, n);
+		reverseArray(nums, 0, n);
+	}
+
+
+	// Dividing the array into GCD(n, k) segments and working on each // Swapping technique
+	/*
 	public int gcd(int a, int b) {
 		if(b == 0) return a;
 		return gcd(b, a%b);
@@ -66,5 +91,6 @@ public class _189 {
 			nums[i] = curr;
 		}
 	}
+	*/
 
 }
