@@ -1,5 +1,7 @@
 package GFG.Medium;
 
+import java.util.HashMap;
+
 /*
 
 https://practice.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=longest-sub-array-with-sum-k
@@ -42,6 +44,29 @@ Constraints:
 
 public class Longest_SubArray_with_Sum_K {
 	
+	// prefix sum HashMap solution O(n) 
+	public static int lenOfLongSubarr(int A[], int N, int K) {
+		HashMap<Long, Integer> occuredFirstMap = new HashMap<Long, Integer>();
+		occuredFirstMap.put(0l, -1);
+		int i, answer = 0;
+		Long curr_sum = 0l;
+		Integer value;
+		for(i=0; i<N; i++) {
+			curr_sum += A[i];
+			value = occuredFirstMap.get(curr_sum-K);
+			if(value != null) {
+				answer = Math.max(answer, i-value);
+			}
+			value = occuredFirstMap.get(curr_sum);
+			if(value == null) {
+				occuredFirstMap.put(curr_sum, i);
+			}
+		}
+		return answer;
+	}
+
+	// prefix sum solution O(n^2) - TLE
+	/*
 	private static int[] getPrefixSum(int A[]) {
 		int n = A.length;
 		int[] prefixSumArr = new int[n+1];
@@ -49,7 +74,6 @@ public class Longest_SubArray_with_Sum_K {
 		return prefixSumArr;
 	}
 
-	// prefix sum solution O(n^2) - TLE
 	public static int lenOfLongSubarr(int A[], int N, int K) {
 		int[] prefixSumArr = getPrefixSum(A);
 		int i, j, k, n=N;
@@ -61,4 +85,5 @@ public class Longest_SubArray_with_Sum_K {
 		}
 		return 0;
 	}
+	*/
 }
