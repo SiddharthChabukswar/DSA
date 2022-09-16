@@ -1,6 +1,6 @@
 package GFG.Easy;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 
 /*
 
@@ -48,7 +48,22 @@ Constraints:
 
 public class Majority_Element {
 
+	// Bayer-Moore's algorithm for voting O(n) - Space(O(1))
+	static int majorityElement(int a[], int size) {
+		int count = 0, majority_element = -1;
+		for(int i=0; i<size; i++) {
+			if(count == 0) majority_element = a[i];
+			if(a[i] == majority_element) count++;
+			else count--;
+		}
+		count = 0;
+		for(int i=0; i<size; i++) if(a[i] == majority_element) count++;
+		if(count <= size/2) majority_element = -1;
+		return majority_element;
+	}
+
 	// HashMap solution O(n)
+	/*
 	static int majorityElement(int a[], int size) {
 		HashMap<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
 		Integer value, answer = -1;
@@ -63,5 +78,6 @@ public class Majority_Element {
 		}
 		return answer;
 	}
+	*/
 
 }

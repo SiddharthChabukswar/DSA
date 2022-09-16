@@ -7,7 +7,7 @@ Time complexity: O(n)
 
 Approach:
 
-1. Set a counter and max_element to 0
+1. Set a counter to 0
 2. traverse the array and check if count == 0
 3. if count == 0 set max_element to curr_ele
 4. if curr_ele == max_element  increment count
@@ -18,10 +18,10 @@ Approach:
 
 */
 
-public class BoyerMooreAlgorithm {
+public class BoyerMooreVotingAlgorithm {
 	
 	public static int getMajorityElement(int[] nums) {
-		int count = 0, majority_element = 0, n = nums.length;
+		int count = 0, majority_element = -1, n = nums.length;
 		for(int i=0; i<n; i++){
 			if(count == 0) majority_element = nums[i];
 			if(majority_element == nums[i]) count++;
