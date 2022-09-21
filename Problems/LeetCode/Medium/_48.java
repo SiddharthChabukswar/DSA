@@ -28,11 +28,41 @@ n == matrix.length == matrix[i].length
 1 <= n <= 20
 -1000 <= matrix[i][j] <= 1000
 
+
+
+[[5,1,9,11]
+ [2,4,8,10]
+ [13,3,6,7] 
+ [15,14,12,16]]
+
+[[15,13,2,5] 
+ [14,4,4,1]
+ [12,8,6,9]
+ [16,7,10,11]]
+
+[[15,13,2,5]
+ [14,3,4,1]
+ [12,6,8,9]
+ [16,7,10,11]]
+
 */
 
 public class _48 {
 	
 	public void rotate(int[][] matrix) {
-		
+		int i, j, temp, temp2, n = matrix.length, max_j, max_i;
+		for(i=0; i<n/2; i++) {
+			max_j = n-i-1;
+			for(j=i; j<max_j; j++) {
+				max_i = n-j-1;
+				temp = matrix[j][max_j];
+				matrix[j][max_j] = matrix[i][j];
+				temp2 = matrix[max_j][max_i];
+				matrix[max_j][max_i] = temp;
+				temp = matrix[max_i][i];
+				matrix[max_i][i] = temp2;
+				matrix[i][j] = temp;
+			}
+		}
 	}
 }
