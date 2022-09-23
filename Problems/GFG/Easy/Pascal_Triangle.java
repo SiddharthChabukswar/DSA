@@ -45,6 +45,22 @@ Constraints:
 
 public class Pascal_Triangle {
 
+	// Binomial coefficient approach O(n)
+	/*
+	ArrayList<Long> nthRowOfPascalTriangle(int n) {
+		ArrayList<Long> pascalTriangleRow = new ArrayList<Long>();
+		pascalTriangleRow.add(1l);
+		Long coeffn;
+		for(int i=1; i<n; i++) {
+			if((n-i)%i == 0) coeffn = (pascalTriangleRow.get(i-1)*((n-i)/i))%1000000007l;
+			else coeffn = ((pascalTriangleRow.get(i-1)/i)*(n-i))%1000000007l;
+			pascalTriangleRow.add(coeffn);
+		}
+		return pascalTriangleRow;
+	}
+	*/
+
+	// Old Approach O(n^2)
 	ArrayList<Long> nthRowOfPascalTriangle(int n) {
 		ArrayList<ArrayList<Long>> pascalTriangle = new ArrayList<ArrayList<Long>>();
 		ArrayList<Long> pascalTriangleRow;
