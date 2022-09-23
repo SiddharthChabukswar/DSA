@@ -1,7 +1,7 @@
 package LeetCode.Medium;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -38,7 +38,42 @@ Follow up: Could you solve the problem in linear time and in O(1) space?
 
 public class _229 {
 
+	// Modified BoyerMoore's Voting algorithm: O(1) space
+	public List<Integer> majorityElement(int[] nums) {
+		List<Integer> majorityElements3 = new ArrayList<Integer>();
+		int maj_ele1 = -1, maj_ele2 = -1, count1 = 0, count2 = 0;
+		for(int num: nums) {
+			System.out.println(maj_ele1 + " " + count1 + " " + maj_ele2 + " " + count2);
+			if(num == maj_ele1) {
+				count1++;
+			} else if(num == maj_ele2) {
+				count2++;
+			} else if(count1 == 0) {
+				maj_ele1 = num;
+				count1++;
+			} else if(count2 == 0) {
+				maj_ele2 = num;
+				count2++;
+			} else {
+				count1--;
+				count2--;
+			}
+		}
+		System.out.println(maj_ele1 + " " + count1 + " " + maj_ele2 + " " + count2);
+		count1 = 0;
+		count2 = 0;
+		for(int num: nums) {
+			if(num == maj_ele1) count1++;
+			else if(num == maj_ele2) count2++;
+		}
+		if(count1 > nums.length/3) majorityElements3.add(maj_ele1);
+		if(count2 > nums.length/3) majorityElements3.add(maj_ele2);
+		return majorityElements3;
+	}
+
+
 	// HashMap solution : O(n) space
+	/*
 	public List<Integer> majorityElement(int[] nums) {
 		List<Integer> majorityElements3 = new ArrayList<Integer>();
 		Integer n = nums.length, value, min_freq = n/3;
@@ -54,5 +89,6 @@ public class _229 {
 		}
 		return majorityElements3;
 	}
+	*/
 	
 }
