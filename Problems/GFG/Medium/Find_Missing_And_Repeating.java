@@ -36,6 +36,27 @@ Constraints:
 
 public class Find_Missing_And_Repeating {
 
+	// XOR method O(n)
+	int[] findTwoElement(int arr[], int n) {
+		int xXORy = 0, x = 0, y = 0, count = 0;
+		for(int a: arr) xXORy ^= a;
+		for(int i=1; i<=n; i++) xXORy ^= i;
+		int set_bit_num = xXORy & ~(xXORy-1);
+		for(int a: arr) {
+			if((a & set_bit_num) == 0) y ^= a;
+			else x ^= a;
+		}
+		for(int i=1; i<=n; i++) {
+			if((i & set_bit_num) == 0) y ^= i;
+			else x ^= i;
+		}
+		for(int a: arr) if(a == y) count++;
+		if(count == 0) return new int[]{x, y};
+		return new int[]{y, x};
+	}
+
+	// Visiting index methods O(n)
+	/*
 	int[] findTwoElement(int arr[], int n) {
 		int sum = 0, idx=-1, exp_sum;
 		if(n%2 == 0) exp_sum = (n/2)*(n+1);
@@ -49,5 +70,6 @@ public class Find_Missing_And_Repeating {
 		sum -= (idx+1);
 		return new int[]{idx+1, exp_sum-sum};
 	}
+	*/
 
 }
