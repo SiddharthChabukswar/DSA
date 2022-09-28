@@ -1,5 +1,7 @@
 package GFG.Medium;
 
+// import java.util.Scanner;
+
 /*
 
 https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=inversion-of-array
@@ -41,9 +43,53 @@ Constraints:
 
 */
 
+class MergeSortInversion {
+
+	long mergeAndCount(long arr[], int left, int mid, int right) {
+		long[] temp = new long[right-left+1];
+		int ptr1 = left;
+		int ptr2 = mid+1;
+		int k = 0;
+		long count = 0l;
+		while(ptr1 <= mid && ptr2 <= right) {
+			if(arr[ptr1] <= arr[ptr2]) {
+				temp[k++] = arr[ptr1++];
+			} else {
+				count += (long)(mid-ptr1+1);
+				temp[k++] = arr[ptr2++];
+			}
+		}
+		while(ptr1 <= mid) temp[k++] = arr[ptr1++];
+		while(ptr2 <= right) temp[k++] = arr[ptr2++];
+		for(k=left; k<=right; k++) arr[k] = temp[k-left];
+		return count;
+	}
+
+	long mergeSort(long arr[], int left, int right) {
+		long count = 0l;
+		if(left < right) {
+			int mid = (left+right)/2;
+			count += mergeSort(arr, left, mid);
+			count += mergeSort(arr, mid+1, right);
+			count += mergeAndCount(arr, left, mid, right);
+		}
+		return count;
+	}
+
+}
+
 public class Count_Inversions {
 
+	// Merge Sort approach O(NlogN)
+	static long inversionCount(long arr[], long N) {
+		MergeSortInversion mergeSortInversion = new MergeSortInversion(); 
+		return mergeSortInversion.mergeSort(arr, 0, (int)(N-1));
+	}
+
+
+
 	// Linear search O(N^2) (T.L.E.)
+	/*
 	static long inversionCount(long arr[], long N) {
 		long answer = 0l;
 		for(int i=0; i<N; i++) {
@@ -53,5 +99,6 @@ public class Count_Inversions {
 		}
 		return answer;
 	}
+	*/
 
 }
