@@ -37,7 +37,20 @@ Constraints:
 
 public class Maximum_Product_Subarray {
 
+	// Kadane's algorithm one pass
+	long maxProduct(int[] arr, int n) {
+		long result = arr[0], max_product = arr[0], min_product = arr[0], temp;
+		for(int i=1; i<n; i++) {
+			temp = Math.max(arr[i], Math.max(max_product*arr[i], min_product*arr[i]));
+			min_product = Math.min(arr[i], Math.min(max_product*arr[i], min_product*arr[i]));
+			max_product = temp;
+			result = Math.max(max_product, result);
+		}
+		return result;
+	}
+
 	// Two pass from left to right and right to left
+	/*
 	long maxProduct(int[] arr, int n) {
 		long result = (long)arr[0], curr_prod;
 		boolean isZeroPresent = false;
@@ -64,5 +77,6 @@ public class Maximum_Product_Subarray {
 		if(isZeroPresent == true) result = Math.max(result, 0l);
 		return result;
 	}
+	*/
 
 }
