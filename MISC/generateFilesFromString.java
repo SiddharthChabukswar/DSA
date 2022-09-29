@@ -8,7 +8,7 @@ public class generateFilesFromString {
 
 	public static String filterString(String fileName) {
 		StringBuilder filteredStringBuilder = new StringBuilder();
-		
+		System.out.println();
 		for(Character c: fileName.toCharArray()) {
 			if(c >= 'a' && c <= 'z') filteredStringBuilder.append(c);
 			else if(c >= 'A' && c <= 'Z') filteredStringBuilder.append(c);
