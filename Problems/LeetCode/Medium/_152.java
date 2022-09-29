@@ -34,7 +34,20 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 
 public class _152 {
 
+	// Kadane's algorithm - one pass O(n)
+	public int maxProduct(int[] nums) {
+		int maxProduct = nums[0], minProduct = nums[0], result = nums[0], temp, n = nums.length;
+		for(int i=1; i<n; i++) {
+			temp = Math.max(nums[i], Math.max(maxProduct*nums[i], minProduct*nums[i]));
+			minProduct = Math.min(nums[i], Math.min(maxProduct*nums[i], minProduct*nums[i]));
+			maxProduct = temp;
+			result = Math.max(maxProduct, result);
+		}
+		return result;
+	}
+
 	// Two pass approach O(n)
+	/*
 	public int maxProduct(int[] nums) {
 		int maxProduct = nums[0], currProduct, n = nums.length, i;
 		boolean isZeroPresent = false;
@@ -61,5 +74,6 @@ public class _152 {
 		if(isZeroPresent == true) maxProduct = Math.max(maxProduct, 0);
 		return maxProduct;
 	}
+	*/
 	
 }
