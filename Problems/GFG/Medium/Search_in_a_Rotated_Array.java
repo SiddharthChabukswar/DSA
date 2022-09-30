@@ -41,6 +41,7 @@ Constraints:
 
 public class Search_in_a_Rotated_Array {
 
+	// Direct Binary Search O(logn)
 	int search(int A[], int l, int h, int key) {
 		int mid;
 		while(l <= h) {
