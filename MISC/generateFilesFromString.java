@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+// Use for GFG
+
 public class generateFilesFromString {
 
 	public static String filterString(String fileName) {
