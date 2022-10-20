@@ -7,11 +7,12 @@ https://practice.geeksforgeeks.org/problems/median-of-2-sorted-arrays-of-differe
 Given two sorted arrays array1 and array2 of size m and n respectively. Find the median of the two sorted arrays.
 
 Example 1:
-
+1
 Input:
 m = 3, n = 4
 array1[] = {1,5,9}
 array2[] = {2,3,6,7}
+1 2 3 5 6 7 9
 Output: 5
 Explanation: The middle element for
 {1,2,3,5,6,7,9} is 5
@@ -38,37 +39,25 @@ Constraints:
 public class Median_of_2_Sorted_Arrays_of_Different_Sizes {
 
 	static double medianOfArrays(int m, int n, int a[], int b[]){
-		if(m==0 && n==0) return 0.0;
-		if(m==0) {
-			if(n%2 != 0) return (double)b[n/2];
-			else return (double)(b[n/2]+b[n/2-1])/2.0;
-		}
-		if(n==0) {
-			if(m%2 != 0) return (double)a[m/2];
-			else return (double)(a[m/2]+a[m/2-1])/2.0;
-		}
-		int ptr1, ptr2, median = (m+n)/2;
+		if(m > n) return medianOfArrays(n, m, b, a);
+		int cut1, cut2, low, high, median = (m+n)/2;
 		int l1, l2, r1, r2;
-		ptr2 = Math.min(median, n-1);
-		ptr1 = median - ptr2 - 1;
-		while(ptr1 < m && ptr2 < n) {
-			l1 = (ptr1 == -1)?Integer.MIN_VALUE:a[ptr1];
-			r1 = (ptr1 == m-1)?Integer.MAX_VALUE:a[ptr1+1];
-			l2 = (ptr2 == -1)?Integer.MIN_VALUE:b[ptr2];
-			r2 = (ptr2 == n-1)?Integer.MAX_VALUE:b[ptr2+1];
+		low = 0;
+		high = m;
+		while(low <= high) {
+			cut1 = low + (high-low)/2;
+			cut2 = median - cut1;
+			l1 = (cut1 == 0)?Integer.MIN_VALUE:a[cut1-1];
+			r1 = (cut1 == m)?Integer.MAX_VALUE:a[cut1];
+			l2 = (cut2 == 0)?Integer.MIN_VALUE:b[cut2-1];
+			r2 = (cut2 == n)?Integer.MAX_VALUE:b[cut2];
 			if(l1 <= r2 && l2 <= r1) {
-				if((m+n)%2 != 0) return Math.max(l1, l2);
-				else {
-					if(l1 > l2 && ptr1 != 0) l2 = Math.max(l2, a[ptr1-1]);
-					else if(l2 > l1 && ptr2 != 0) l1 = Math.max(l1, b[ptr2-1]);
-					return (double)(l1+l2)/2.0;
-				}
+				if((m+n)%2 == 0) return (double)(Math.max(l1, l2) + Math.min(r1, r2))/2.0;
+				else return (double) Math.min(r1, r2);
 			} else if(l1 > r2) {
-				ptr1--;
-				ptr2++;
-			} else if(l2 > r1) {
-				ptr1++;
-				ptr2--;
+				high = cut1 - 1;
+			} else {
+				low = cut1 + 1;
 			}
 		}
 		return 0.0;
