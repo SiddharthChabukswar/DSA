@@ -2,8 +2,6 @@ package GFG.Medium;
 
 /*
 
-https://practice.geeksforgeeks.org/problems/largest-sum-subarray-of-size-at-least-k3121/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=largest-sum-subarray-of-size-at-least-k
-
 Given an array and a number k, find the largest sum of the subarray containing at least k numbers. It may be assumed that the size of array is at-least k.
  
 
@@ -49,7 +47,23 @@ Constraints:
 public class Largest_Sum_Subarray_of_Size_at_least_K {
 
 	public long maxSumWithK(long a[], long n, long k) {
-		return 0l;
+		long answer = Long.MIN_VALUE, sum = 0l, prev = 0l;
+		for(int i=0; i<(int)k; i++) {
+			sum += a[i];
+		}
+		int low = 0;
+		answer = Math.max(sum, answer);
+		for(int i=(int)k; i<(int)n; i++) {
+			sum += a[i];
+			prev += a[low++];
+			answer = Math.max(sum, answer);
+			if(prev < 0) {
+				sum = sum - prev;
+				prev = 0l;
+				answer = Math.max(sum, answer);
+			}
+		}
+		return answer;
 	}
 
 }
