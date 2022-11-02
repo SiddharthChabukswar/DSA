@@ -50,11 +50,16 @@ Constraints:
 
 public class Check_if_strings_are_rotations_of_each_other_or_not {
 
+	public static boolean isSubString(String input, String pattern) {
+		// KMP substring search
+		return true;
+	}
+
 	public static boolean areRotations(String s1, String s2) {
 		if(s2.length() != s1.length()) return false;
 		if(s2.equals(s1) == true) return true;
 		s2 = s2+s2;
-		return s2.indexOf(s1, 0)==-1?false:true;
+		return isSubString(s2, s1);
 	}
 
 }
