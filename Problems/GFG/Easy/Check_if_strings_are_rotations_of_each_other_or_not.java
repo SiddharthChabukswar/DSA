@@ -12,7 +12,7 @@ Example 1:
 
 Input:
 geeksforgeeks
-forgeeksgeeks
+forgeeksgeeksforgeeksgeeks
 Output: 
 1
 Explanation: s1 is geeksforgeeks, s2 is
@@ -50,9 +50,36 @@ Constraints:
 
 public class Check_if_strings_are_rotations_of_each_other_or_not {
 
-	public static boolean isSubString(String input, String pattern) {
-		// KMP substring search
-		return true;
+	static int[] getPrefixSuffixArr(String pattern) {
+		int n = pattern.length(), i, j;
+		int[] prefixSuffixArr = new int[n];
+		prefixSuffixArr[0] = 0;
+		i = 1;
+		j = 0;
+		while(i<n) {
+			if(pattern.charAt(i) == pattern.charAt(j)) prefixSuffixArr[i++] = ++j;
+			else if(j==0) prefixSuffixArr[i++] = 0;
+			else j = prefixSuffixArr[j-1];
+		}
+		return prefixSuffixArr;
+	}
+
+	public static boolean isSubString(String text, String pattern) {
+		int[] prefixSuffixArr = getPrefixSuffixArr(pattern);
+		int textLen = text.length(), patternLen = pattern.length(), i = 0, j = 0;
+		while(i<textLen) {
+			if(text.charAt(i) == pattern.charAt(j)) {
+				i++;
+				j++;
+			} else if(j==0) {
+				i++;
+			}
+			else {
+				j = prefixSuffixArr[j-1];
+			}
+			if(j == patternLen) return true;
+		}
+		return false;
 	}
 
 	public static boolean areRotations(String s1, String s2) {
