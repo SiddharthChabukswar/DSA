@@ -1,6 +1,6 @@
 package GFG.Easy;
 
-import GFG.Utils.Node;
+import GFG.Utils.LL.Node;
 
 /*
 

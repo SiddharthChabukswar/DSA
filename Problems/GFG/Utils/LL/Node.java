@@ -1,4 +1,4 @@
-package GFG.Utils;
+package GFG.Utils.LL;
 
 /*
  * Representation class of a linkedList
