@@ -39,6 +39,7 @@ Constraints:
 public class Reverse_a_linked_list {
 
 	//Function to reverse a linked list. 
+	/*
 	// Iterative
 	Node reverseList(Node head) {
 		Node prev = null, curr = head, next = head.next;
@@ -50,6 +51,18 @@ public class Reverse_a_linked_list {
 		}
 		curr.next = prev;
 		return curr;
+	}
+	*/
+
+	// Recursive
+	Node reverseList(Node head) {
+		Node curr = head, currNext;
+		if(head == null || head.next == null) return head;
+		head = reverseList(head.next);
+		currNext = curr.next;
+		currNext.next = curr;
+		curr.next = null;
+		return head;
 	}
 
 }
