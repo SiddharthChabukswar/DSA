@@ -1,7 +1,5 @@
 package GFG.Easy;
 
-import java.util.Stack;
-
 import GFG.Utils.LL.Node;
 
 /*
