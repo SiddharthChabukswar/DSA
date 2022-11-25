@@ -51,19 +51,16 @@ public class Nth_node_from_end_of_linked_list {
 
 	//Function to find the data of nth node from the end of a linked list.
 	int getNthFromLast(Node head, int n) {
-		Node curr = head.next, prev = head, currnext;
-		prev.next = null;
-		int count = 1;
-		while(curr != null) {
-			currnext = curr.next;
-			curr.next = prev;
-			prev = curr;
-			curr = currnext;
-			count++;
+		Node ptr1 = head, ptr2 = head;
+		while(n-- > 1) {
+			ptr2 = ptr2.next;
+			if(ptr2 == null) return -1;
 		}
-		if(n > count) return -1;
-		while(n-- > 1) prev = prev.next;
-		return prev.data;
+		while(ptr2.next != null) {
+			ptr1 = ptr1.next;
+			ptr2 = ptr2.next;
+		}
+		return ptr1.data;
 	}
 
 }
