@@ -73,6 +73,7 @@ class Node {
 public class Clone_a_linked_list_with_next_and_random_pointer {
 
 	//Function to clone a linked list with next and random pointer.
+	/*
 	Node copyList(Node head) {
 		Node newHead = null, newNode = null;
 		Node curr1 = head, curr2 = null;
@@ -99,6 +100,40 @@ public class Clone_a_linked_list_with_next_and_random_pointer {
 			}
 			curr1 = curr1.next;
 			curr2 = curr2.next;
+		}
+		return newHead;
+	}
+	*/
+
+	//Function to clone a linked list with next and random pointer.
+	Node copyList(Node head) {
+		if(head == null) return null;
+		Node newHead = null, currNode = head, newNode = null;
+		while(currNode != null) {
+			newNode = new Node(currNode.data);
+			newNode.next = currNode.next;
+			currNode.next = newNode;
+			currNode = newNode.next;
+		}
+		newHead = head.next;
+		currNode = head;
+		while(currNode != null) {
+			newNode = currNode.next;
+			if(currNode.arb != null) newNode.arb = currNode.arb.next;
+			currNode = currNode.next.next;
+		}
+		currNode = head;
+		newNode = head.next;
+		Node nextCurrNode = newNode.next, nextNewNode = null;
+		while(currNode != null) {
+			if(nextCurrNode == null) nextNewNode = null;
+			else nextNewNode = nextCurrNode.next;
+			currNode.next = nextCurrNode;
+			currNode = nextCurrNode;
+			if(nextNewNode == null) nextCurrNode = null;
+			else nextCurrNode = nextNewNode.next;
+			newNode.next = nextNewNode;
+			newNode = nextNewNode;
 		}
 		return newHead;
 	}
