@@ -68,11 +68,11 @@ Constraints:
 
 */
 
-class Node {
+class BottomNode {
 	int data;
-	Node next;
-	Node bottom;
-	Node(int d) {
+	BottomNode next;
+	BottomNode bottom;
+	BottomNode(int d) {
 		data = d;
 		next = null;
 		bottom = null;
@@ -81,15 +81,15 @@ class Node {
 
 public class Flattening_a_Linked_List {
 
-	Node flatten(Node root) {
+	BottomNode flatten(BottomNode root) {
 		if(root == null) return null;
 		int n = 0, itr = 0, minVal = 0, minValIdx = 0;
-		Node curr = root, newHead = null, newNode = null;
+		BottomNode curr = root, newHead = null, newBottomNode = null;
 		while(curr != null) {
 			curr = curr.next;
 			n++;
 		}
-		Node[] branchHead = new Node[n];
+		BottomNode[] branchHead = new BottomNode[n];
 		curr = root;
 		while(curr != null) {
 			branchHead[itr++] = curr;
@@ -110,11 +110,11 @@ public class Flattening_a_Linked_List {
 				}
 			}
 			if(minVal > 1000) break;
-			newNode = new Node(minVal);
+			newBottomNode = new BottomNode(minVal);
 			branchHead[minValIdx] = branchHead[minValIdx].bottom;
-			if(newHead == null)	newHead = newNode;
-			else curr.bottom = newNode;
-			curr = newNode;
+			if(newHead == null)	newHead = newBottomNode;
+			else curr.bottom = newBottomNode;
+			curr = newBottomNode;
 		}
 		return newHead;
 	}
