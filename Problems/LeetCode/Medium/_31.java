@@ -43,6 +43,8 @@ Constraints:
 
 public class _31 {
 	
+	/**
+	 * O(nlogN)
 	public void nextPermutation(int[] nums) {
 		int n = nums.length, i, j, min_ele_val, min_ele_idx;
 		i = n-2;
@@ -68,5 +70,41 @@ public class _31 {
 		if(i<0) Arrays.sort(nums);
 		else Arrays.sort(nums, i+1, n);
 	}
+	*/
+
+	/**
+	 * O(n)
+	 */
+	public void nextPermutation(int[] nums) {
+        int n = nums.length, i, j;
+        for (i = n - 1; i >= 1; i--) {
+            if (nums[i] <= nums[i - 1])
+                continue;
+            for (j = i; j < n; j++) {
+                if (nums[i - 1] >= nums[j])
+                    break;
+            }
+            swap(nums, i - 1, j - 1);
+            reverse(nums, i, n);
+            break;
+        }
+        if (i == 0)
+            reverse(nums, i, n);
+    }
+
+    private void swap(final int[] nums, final int i, final int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    private void reverse(final int[] nums, final int i, final int n) {
+        final int mid = (n - i) / 2 + i;
+        int j = i;
+        while (j < mid) {
+			swap(nums, j, n - (j - i) - 1);
+            j++;
+        }
+    }
 
 }
