@@ -5,6 +5,7 @@ public class _287 {
 	/*
 	 * Modifying the array inplace O(N) O(1)
 	 */
+	/*
 	public int findDuplicate(int[] nums) {
 		int answer = 0;
 		int n = nums.length;
@@ -22,6 +23,25 @@ public class _287 {
 			nums[i] = Math.abs(nums[i]);
 		}
 		return answer;
+	}
+	*/
+
+	/*
+	 * FLOYD's hare and tortoise method.
+	 */
+	public int findDuplicate(int[] nums) {
+		int slow = nums[0];
+		int fast = nums[0];
+		do {
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		} while(slow != fast);
+		fast = nums[0];
+		while(slow != fast) {
+			slow = nums[slow];
+			fast = nums[fast];
+		}
+		return slow;
 	}
 
 }
