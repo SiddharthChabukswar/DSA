@@ -1,7 +1,10 @@
 package LeetCode.Medium;
 
+import java.util.HashMap;
 // import java.util.HashMap;
-import java.util.HashSet;
+// import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 /*
@@ -39,7 +42,8 @@ s consists of English letters, digits, symbols and spaces.
 
 public class _3 {
 
-	// Sliding Window O(n)
+	// Sliding Window O(2*n)
+	/*
 	public int lengthOfLongestSubstring(String s) {
 		char[] s_char_arr = s.toCharArray();
 		int max_len = 0, n = s_char_arr.length, i=0, j=0;
@@ -52,6 +56,26 @@ public class _3 {
 			}
 			visited.add(curr_char);
 			max_len = Math.max(max_len, j-i+1);
+		}
+		return max_len;
+	}
+	*/
+	// Sliding Window with hashmap O(n)
+	public int lengthOfLongestSubstring(String s) {
+		char[] s_char_arr = s.toCharArray();
+		int max_len = 0, n = s_char_arr.length, i=0, j=0;
+		Integer lastIdx;
+		Character curr_char;
+		Map<Character, Integer> lastVisited = new HashMap<>();
+		while(j<n){
+			curr_char = s_char_arr[j];
+			lastIdx = lastVisited.get(curr_char);
+			if (!Objects.isNull(lastIdx) && lastIdx >= i) {
+				i = lastIdx+1;
+			}
+			lastVisited.put(curr_char, j);
+			max_len = Math.max(max_len, j-i+1);
+			j++;
 		}
 		return max_len;
 	}
