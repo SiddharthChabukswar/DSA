@@ -49,6 +49,10 @@ n == matrix.length == matrix[i].length
 
 public class _48 {
 	
+	/*
+	 * Swap spirally O(n^2)
+	 */
+	/*
 	public void rotate(int[][] matrix) {
 		int i, j, temp, temp2, n = matrix.length, max_j, max_i;
 		for(i=0; i<n/2; i++) {
@@ -64,5 +68,38 @@ public class _48 {
 				matrix[i][j] = temp;
 			}
 		}
+	}
+	*/
+
+	private void transpose(int[][] matrix) {
+		int n = matrix.length;
+		int temp;
+		for (int row=0; row<n; row++) {
+			for(int col=0; col<row; col++) {
+				temp  = matrix[row][col];
+				matrix[row][col] = matrix[col][row];
+				matrix[col][row] = temp;
+			}
+		}
+	}
+
+	private void swapColumns(int[][] matrix) {
+		int n = matrix.length;
+		int temp;
+		for (int col=0; col<n/2; col++) {
+			for (int row=0; row<n; row++) {
+				temp = matrix[row][col];
+				matrix[row][col] = matrix[row][n-col-1];
+				matrix[row][n-col-1] = temp;
+			}
+		}
+	}
+
+	/*
+	 * Transpose and swap columns O(n^2)
+	 */
+	public void rotate(int[][] matrix) {
+		transpose(matrix);
+		swapColumns(matrix);
 	}
 }
