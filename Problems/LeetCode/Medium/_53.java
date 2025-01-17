@@ -1,4 +1,4 @@
-package LeetCode.Easy;
+package LeetCode.Medium;
 
 // import java.util.Arrays;
 import java.util.Scanner;
@@ -49,7 +49,9 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
 
 */
 
-public class fiftythree {
+public class _53 {
+
+	/* Kadane's alogorithm - DP O(n)
 
 	public int maxSubArray(int[] nums) {
 		int nlen = nums.length;
@@ -64,7 +66,6 @@ public class fiftythree {
 		}
 
 		// Brute force O(n^2) (TLE)
-		/*
 		int i, j, currsum = 0, maxsum = Integer.MIN_VALUE;
 		for(i=0; i<nlen; i++){
 			currsum = 0;
@@ -73,8 +74,37 @@ public class fiftythree {
 				maxsum = Math.max(maxsum, currsum);
 			}
 		}
-		*/
 		return maxsum;
+	}
+	*/
+
+	/* Divide and conquer approach O(nlogn) */
+	private int crossMaxSum(int[] nums, int left, int mid, int right) {
+		int leftMaxSum = Integer.MIN_VALUE, rightMaxSum = Integer.MIN_VALUE;
+		int currSum, itr;
+		for (itr=mid, currSum=0; itr>=left; itr--) {
+			currSum += nums[itr];
+			leftMaxSum = Math.max(leftMaxSum, currSum);
+		}
+		for (itr=mid+1, currSum=0; itr<=right; itr++) {
+			currSum += nums[itr];
+			rightMaxSum = Math.max(rightMaxSum, currSum);
+		}
+		return leftMaxSum+rightMaxSum;
+	}
+
+	private int maxSubArray(int[] nums, int left, int right) {
+		if (left == right)
+			return nums[left];
+		int mid = (left+right)/2;
+		int leftMaxSum = maxSubArray(nums, left, mid);
+		int rightMaxSum = maxSubArray(nums, mid+1, right);
+		int crossMaxSum = crossMaxSum(nums, left, mid, right);
+		return Math.max(Math.max(leftMaxSum, rightMaxSum), crossMaxSum);
+	}
+
+	public int maxSubArray(int[] nums) {
+		return maxSubArray(nums, 0, nums.length-1);
 	}
 
 	public static void main(String[] args) {
@@ -84,7 +114,7 @@ public class fiftythree {
 		int[] nums = new int[n];
 		System.out.println("Enter array elements: ");
 		for(int i=0; i<n; i++) nums[i] = sc.nextInt();
-		fiftythree objFiftythree = new fiftythree();
+		_53 objFiftythree = new _53();
 		System.out.println(objFiftythree.maxSubArray(nums));
 		sc.close();
 	}

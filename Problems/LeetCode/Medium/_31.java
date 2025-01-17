@@ -41,6 +41,7 @@ Constraints:
 
 */
 
+@SuppressWarnings("unused")
 public class _31 {
 	
 	/**
