@@ -34,31 +34,80 @@ intervals[i].length == 2
 */
 
 public class _56 {
+	
+	private void mergeSortedArrays(int[][] intervals, int left, int mid, int right) {
+		int ptr1 = left, ptr2 = mid+1, ptr3 = 0;
+		int[][] tempArray = new int[right-left+1][2];
+		while (ptr1 <= mid && ptr2 <= right) {
+			if (intervals[ptr1][0] < intervals[ptr2][0]) {
+				tempArray[ptr3++] = intervals[ptr1++];
+			} else if (intervals[ptr1][0] > intervals[ptr2][0]) {
+				tempArray[ptr3++] = intervals[ptr2++];
+			} else {
+				if (intervals[ptr1][1] <= intervals[ptr2][1]) {
+					tempArray[ptr3++] = intervals[ptr1++];
+				} else {
+					tempArray[ptr3++] = intervals[ptr2++];
+				}
+			}
+		}
+		while (ptr1 <= mid) {
+			tempArray[ptr3++] = intervals[ptr1++];
+		}
+		while (ptr2 <= right) {
+			tempArray[ptr3++] = intervals[ptr2++];
+		}
+		ptr3 = 0;
+		while (ptr3 < (right-left+1)) {
+			intervals[left+ptr3] = tempArray[ptr3];
+			ptr3++;
+		}
+	}
+
+	private void mergeSort(int[][] intervals, int left, int right) {
+		if (left == right) return;
+		int mid = (left+right)/2;
+		mergeSort(intervals, left, mid);
+		mergeSort(intervals, mid+1, right);
+		mergeSortedArrays(intervals, left, mid, right);
+	}
 
 	public int[][] merge(int[][] intervals) {
-		Comparator<int[]> pairComparator = (int[] pair1, int[] pair2) -> pair1[0] - pair2[0];
-		Arrays.sort(intervals, pairComparator);
+		int itr = 1, n = intervals.length, left_bound, right_bound;
+		if (n == 1) return intervals;
+
+		mergeSort(intervals, 0, n-1);
+		left_bound = intervals[0][0];
+		right_bound = intervals[0][1];
+
 		List<int[]> answerList = new ArrayList<int[]>();
 		int[] answerPair;
-		int i = 0, j = 0, n = intervals.length, max_ele;
-		while(i<n) {
-			answerPair = new int[2];
-			answerPair[0] = intervals[i][0];
-			max_ele = intervals[i][1];
-			j = i+1;
-			while(j<n && intervals[j][0] <= max_ele) max_ele = Math.max(max_ele, intervals[j++][1]);
-			answerPair[1] = max_ele;
-			i = j;
-			answerList.add(answerPair);
-			// System.out.println(answerPair[0] + " " + answerPair[1]);
+		while (itr < n) {
+			if (right_bound >= intervals[itr][0]) {
+				right_bound = Math.max(right_bound, intervals[itr][1]);
+			} else {
+				answerPair = new int[2];
+				answerPair[0] = left_bound;
+				answerPair[1] = right_bound;
+				answerList.add(answerPair);
+			
+				left_bound = intervals[itr][0];
+				right_bound = intervals[itr][1];
+			}
+			itr++;
 		}
+		answerPair = new int[2];
+		answerPair[0] = left_bound;
+		answerPair[1] = right_bound;
+		answerList.add(answerPair);
+		
 		n = answerList.size();
-		i = 0;
-		int[][] answerArray = new int[n][2];
-		for(int[] ansPair: answerList) {
-			answerArray[i++] = ansPair;
+		int[][] mergedArray = new int[n][2];
+		for (int i=0; i<n; i++) {
+			mergedArray[i][0] = answerList.get(i)[0];
+			mergedArray[i][1] = answerList.get(i)[1];
 		}
-		return answerArray;
+		return mergedArray;
 	}
 	
 }
