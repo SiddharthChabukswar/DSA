@@ -33,6 +33,7 @@ intervals[i].length == 2
 
 */
 
+@SuppressWarnings("unused")
 public class _56 {
 	
 	private void mergeSortedArrays(int[][] intervals, int left, int mid, int right) {
