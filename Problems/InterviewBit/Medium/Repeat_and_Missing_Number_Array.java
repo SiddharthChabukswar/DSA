@@ -26,6 +26,10 @@ A = 3, B = 4
 
 public class Repeat_and_Missing_Number_Array {
 
+	/*
+	 * Using mathematics, sum of N and sum of N^2 O(n)
+	 */
+	/*
 	public int[] repeatedNumber(final int[] A) {
 		long n = A.length;
 		long sumN = (n*(n+1))/2l;
@@ -40,6 +44,49 @@ public class Repeat_and_Missing_Number_Array {
 		int[] answer = new int[2];
 		answer[0] = (int) r;
 		answer[1] = (int) m;
+		return answer;
+	}
+	*/
+
+	/*
+	 * Using bit manipulation XOR, 1 bit change etc.
+	 */
+	public int[] repeatedNumber(final int[] A) {
+		int xor = 0;
+		for (int i=1; i<=A.length; i++) {
+			xor = xor^A[i-1];
+			xor = xor^i;
+		}
+		int diff_num = xor & (~(xor-1));
+		// System.out.println(xor+"_"+diff_num);
+		int x = 0, y = 0;
+		for (int a: A) {
+			if ((diff_num & a) == diff_num) {
+				x = x^a;
+			} else {
+				y = y^a;
+			}
+		}
+		for (int i=1; i<=A.length; i++) {
+			if ((diff_num & i) == diff_num) {
+				x = x^i;
+			} else {
+				y = y^i;
+			}
+		}
+		int[] answer = new int[2];
+		for (int a: A) {
+			if (x == a) {
+				answer[0] = x;
+				answer[1] = y;
+				break;
+			}
+			if (y == a) {
+				answer[0] = y;
+				answer[1] = x;
+				break;
+			}
+		}
 		return answer;
 	}
 
