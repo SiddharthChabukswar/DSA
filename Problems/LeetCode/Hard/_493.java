@@ -42,40 +42,49 @@ public class _493 {
 
 	private int mergeAndCount(int[] nums, int low, int mid, int high) {
 		int count = 0;
-		int ptr1 = low, ptr2 = mid+1, k;
-		while(ptr1 <= mid) {
-			if(ptr2 > high) {
-				count += high-mid;
-				ptr1++;
-			} else if(nums[ptr1] <= 2*(long)(nums[ptr2])) {
-				count += ptr2-mid-1;
-				ptr1++;
-			} else {
+		int ptr1 = low, ptr2 = mid+1, ptr3 = 0;
+		
+		long num1, num2;
+		while (ptr1 <= mid && ptr2 <= high) {
+			num1 = (long) nums[ptr1];
+			num2 = (long) (2l*nums[ptr2]);
+			// System.out.println("CURR: "+num1 + "_" +num2);
+			if (num1 > num2) {
+                // System.out.println(nums[ptr1] + "_" +nums[ptr2]);
+				count += (mid-ptr1+1);
 				ptr2++;
+			} else {
+				ptr1++;
 			}
 		}
+
 		ptr1 = low;
 		ptr2 = mid+1;
-		k = 0;
-		int[] temp = new int[high-low+1];
-		while(ptr1 <= mid && ptr2 <= high) {
-			if(nums[ptr1] <= nums[ptr2]) temp[k++] = nums[ptr1++];
-			else temp[k++] = nums[ptr2++];
+		int[] sortedNums = new int[high-low+1];
+		while (ptr1<=mid && ptr2<=high) {
+			if (nums[ptr1] <= nums[ptr2]) {
+				sortedNums[ptr3++] = nums[ptr1++];
+			} else {
+				sortedNums[ptr3++] = nums[ptr2++];
+			}
 		}
-		while(ptr1 <= mid) temp[k++] = nums[ptr1++];
-		while(ptr2 <= high) temp[k++] = nums[ptr2++];
-		for(k=low; k<=high; k++) nums[k] = temp[k-low];
+		while (ptr1<=mid) {
+			sortedNums[ptr3++] = nums[ptr1++];
+		}
+		while (ptr2<=high) {
+			sortedNums[ptr3++] = nums[ptr2++];
+		}
+		for (int i=0; i<(high-low+1); i++) nums[low+i] = sortedNums[i];
 		return count;
 	}
 
 	private int mergeSort(int[] nums, int low, int high) {
+		if (low == high) return 0;
 		int count = 0;
-		if(low < high) {
-			int mid = (low + high)/2;
-			count += mergeSort(nums, low, mid);
-			count += mergeSort(nums, mid+1, high);
-			count += mergeAndCount(nums, low, mid, high);
-		}
+		int mid = (low + high)/2;
+		count += mergeSort(nums, low, mid);
+		count += mergeSort(nums, mid+1, high);
+		count += mergeAndCount(nums, low, mid, high);
 		return count;
 	}
 
