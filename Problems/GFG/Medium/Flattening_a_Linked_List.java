@@ -68,11 +68,11 @@ Constraints:
 
 */
 
-class BottomNode {
+class Node {
 	int data;
-	BottomNode next;
-	BottomNode bottom;
-	BottomNode(int d) {
+	Node next;
+	Node bottom;
+	Node(int d) {
 		data = d;
 		next = null;
 		bottom = null;
@@ -81,6 +81,10 @@ class BottomNode {
 
 public class Flattening_a_Linked_List {
 
+	/*
+	 * Iterative solution O(M*N*N)
+	 */
+	/*
 	BottomNode flatten(BottomNode root) {
 		if(root == null) return null;
 		int n = 0, itr = 0, minVal = 0, minValIdx = 0;
@@ -117,6 +121,47 @@ public class Flattening_a_Linked_List {
 			curr = newBottomNode;
 		}
 		return newHead;
+	}
+	*/
+
+	/*
+	 * Recursive solution O(M*N*N)
+	 */
+	Node flatten(Node root) {
+		if (root == null || root.next == null) return root;
+		Node flattenNode = flatten(root.next);
+		root.next = null;
+		return mergeLinkedLists(root, flattenNode);
+	}
+
+	private Node mergeLinkedLists(Node list1, Node list2) {
+		if (list1 == null) return list2;
+		else if (list2 == null) return list1;
+
+		Node mergedList = null, currNode = null;
+		if (list1.data <= list2.data) {
+			mergedList = list1;
+			list1 = list1.bottom;
+		}
+		else {
+			mergedList = list2;
+			list2 = list2.bottom;
+		}
+		currNode = mergedList;
+		while (list1 != null && list2 != null) {
+			if (list1.data <= list2.data) {
+				currNode.bottom = list1;
+				currNode = list1;
+				list1 = list1.bottom;
+			} else {
+				currNode.bottom = list2;
+				currNode = list2;
+				list2 = list2.bottom;
+			}
+		}
+		if (list1 != null) currNode.bottom = list1;
+		if (list2 != null) currNode.bottom = list2;
+		return mergedList;
 	}
 
 }
