@@ -32,6 +32,7 @@ public class _42 {
 	/*
 	prefix Max, suffix Max - O(3*n) time O(2*n) space
 	*/
+	/*
 	public int trap(int[] height) {
 		int n = height.length;
 		if (n < 3) return 0;
@@ -49,6 +50,29 @@ public class _42 {
 		for (int i=0; i<n; i++) {
 			currMin = Math.min(prefixMax[i], suffixMax[i]);
 			if (height[i] < currMin) answer += (currMin - height[i]);
+		}
+		return answer;
+	}
+	*/
+
+	/*
+	No extra space, two pointers method
+	*/
+	public int trap(int[] height) {
+		int n = height.length;
+		if (n<3) return 0;	
+		int answer = 0, leftMax = height[0], rightMax = height[n-1], left = 0, right = n-1;
+		while (left < right) {
+			// System.out.println(left+"_"+right+"_"+height[left]+"_"+height[right]+"_"+leftMax+"_"+rightMax);
+			if (leftMax <= rightMax) {
+				leftMax = Math.max(height[left], leftMax);
+				answer += (leftMax-height[left]);
+				left++;
+			} else {
+				rightMax = Math.max(height[right], rightMax);
+				answer += (rightMax-height[right]);
+				right--;
+			}
 		}
 		return answer;
 	}
