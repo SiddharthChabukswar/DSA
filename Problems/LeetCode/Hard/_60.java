@@ -1,5 +1,8 @@
 package LeetCode.Hard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://leetcode.com/problems/permutation-sequence/description/
  * 
@@ -38,6 +41,8 @@ Constraints:
  */
 public class _60 {
 
+	/*
+	Recusion O(N!*N)
 	private void swap(final char[] charArr, final int i, final int j) {
 		char temp = charArr[i];
 		charArr[i] = charArr[j];
@@ -78,5 +83,28 @@ public class _60 {
 		String input = String.valueOf(charArr);
 		return nextPermutation(input, k);
 	}
-	
+	*/
+
+	// Mathematics O(n)
+	public String getPermutation(int n, int k) {
+		final List<Integer> numbers = new ArrayList<>();
+		int factorial = 1;
+		for (int i=1; i<=n; i++) {
+			factorial = factorial*i;
+			numbers.add(i);
+		}
+		StringBuilder answerStringBuilder = new StringBuilder();
+		k -= 1;
+		int num;
+		while (!numbers.isEmpty()) {
+			factorial = factorial/numbers.size();
+			num = k/factorial;
+			answerStringBuilder.append(numbers.get(num));
+			k = k%factorial;
+			numbers.remove(num);
+			System.out.println(answerStringBuilder.toString()+"_"+numbers);
+		}
+		
+		return answerStringBuilder.toString();
+	}
 }
