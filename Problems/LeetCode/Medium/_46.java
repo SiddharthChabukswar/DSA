@@ -39,6 +39,7 @@ public class _46 {
 	/*
 	Recursion O(N!xN) extra space for storing visited elements.
 	*/
+	/*
 	private void recursivePermutation(final int[] nums, final int[] visited, final List<Integer> currList, final List<List<Integer>> permutationList) {
 		if (currList.size() == nums.length) {
 			permutationList.add(new ArrayList<>(currList));
@@ -54,11 +55,36 @@ public class _46 {
 			}
 		}
 	}
+	*/
+
+	private void swap(final int[] nums, final int i, final int j) {
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+	}
+
+	/*
+	Recursion backtracking (N!xN) no extra space.
+	*/
+	private void backtrackingPermutation(final int[] nums, final int index, final List<List<Integer>> permutationList) {
+		if (index == nums.length) {
+			final List<Integer> currList = new ArrayList<>();
+			for (int num: nums) {
+				currList.add(num);
+			}
+			permutationList.add(currList);
+			return;
+		}
+		for (int i=index; i<nums.length; i++) {
+			swap(nums, i, index);
+			backtrackingPermutation(nums, index+1, permutationList);
+			swap(nums, i, index);
+		}
+	}
 
 	public List<List<Integer>> permute(int[] nums) {
 		final List<List<Integer>> permutationList = new ArrayList<>();
-		final int[] visited = new int[nums.length];
-		recursivePermutation(nums, visited, new ArrayList<>(), permutationList);
+		backtrackingPermutation(nums, 0, permutationList);
 		return permutationList;
 	}
 	
