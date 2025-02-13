@@ -34,56 +34,66 @@ Constraints:
 */
 public class _51 {
 
-	private void flipThreatPosition(final int[][] threatPositions, final int row, final int col, final int n, final int operation) {
+	private boolean isSafePosition(final int n, final int row, final int col, final char[][] queenPositions) {
 		// flip threat positions for column
-		for (int i=row; i<n; i++) {
-			threatPositions[i][col] += operation;
+		for (int i=row; i>=0; i--) {
+			if (queenPositions[i][col] != '.') return false;
 		}
 		// flip threat positions for fwd diagonal
-		for (int i=1; i<n-row && i<=col; i++) {
-			threatPositions[row+i][col-i] += operation;
+		for (int i=1; i<=row && i<n-col; i++) {
+			if (queenPositions[row-i][col+i] != '.') return false;
 		}
 		// flip threat positions for bwd diagonal
-		for (int i=1; i<n-row && i<n-col; i++) {
-			threatPositions[row+i][col+i] += operation;
+		for (int i=1; i<=row && i<=col; i++) {
+			if (queenPositions[row-i][col-i] != '.') return false;
 		}
+		return true;
 	}
 
-	private String generatePositionString(final int n, final int col) {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int i=0; i<n; i++) stringBuilder.append('.');
-		stringBuilder.setCharAt(col, 'Q');
-		return stringBuilder.toString();
+	private List<String> generatePositionString(final int n, final char[][] queenPositions) {
+		List<String> positionsStringList = new ArrayList<>();
+		StringBuilder stringBuilder;
+		for (int i=0; i<n; i++) {
+			stringBuilder = new StringBuilder();
+			for (int j=0; j<n; j++) {
+				stringBuilder.append(queenPositions[i][j]);
+			}
+			positionsStringList.add(stringBuilder.toString());
+		}
+		return positionsStringList;
 	}
 
 	/*
 	Recursion with backtracking O(N!*N^2)
 	*/
-	private void placeQueenAtIndexRow(final int n, final int row, final List<String> currPositions, final List<List<String>> positionLists, final int[][] threatPositions) {
+	private void placeQueenAtIndexRow(final int n, final int row, final List<List<String>> positionLists, final char[][] queenPositions) {
 		if (n == row) {
-			positionLists.add(new ArrayList<>(currPositions));
+			positionLists.add(generatePositionString(n, queenPositions));
 			return;
 		}
 		for (int col=0; col<n; col++) {
-			if (threatPositions[row][col] == 0) {
-				flipThreatPosition(threatPositions, row, col, n, 1);
-				currPositions.add(generatePositionString(n, col));
-				// System.out.println(row+"_"+col+"_"+currPositions);
+			if (isSafePosition(n, row, col, queenPositions)) {
+				queenPositions[row][col] = 'Q';
+				// System.out.println(row+"_"+col+);
 				// for (int i=0;i<n;i++){
-				// 	for (int j=0;j<n;j++) System.out.print(threatPositions[i][j]+"_");
+				// 	for (int j=0;j<n;j++) System.out.print(queenPositions[i][j]+" ");
 				// 	System.out.println();
 				// }
-				placeQueenAtIndexRow(n, row+1, currPositions, positionLists, threatPositions);
-				currPositions.remove(currPositions.size()-1);
-				flipThreatPosition(threatPositions, row, col, n, -1);
+				placeQueenAtIndexRow(n, row+1, positionLists, queenPositions);
+				queenPositions[row][col] = '.';
 			}
 		}
 	}
 
 	public List<List<String>> solveNQueens(int n) {
 		List<List<String>> positionLists = new ArrayList<>();
-		int[][] threatPositions = new int[n][n];
-		placeQueenAtIndexRow(n, 0, new ArrayList<>(), positionLists, threatPositions);
+		char[][] queenPositions = new char[n][n];
+		for (int i=0;i<n;i++) {
+			for (int j=0;j<n;j++) {
+				queenPositions[i][j] = '.';
+			}
+		}
+		placeQueenAtIndexRow(n, 0, positionLists, queenPositions);
 		return positionLists;
 	}
 	
